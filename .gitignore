@@ -1,0 +1,13 @@
+node_modules
+.env
+.env.local
+.env.*.local
+.next
+dist
+.sanity
+out
+*.tsbuildinfo
+.DS_Store
+.netlify
+schema.json
+next-env.d.ts

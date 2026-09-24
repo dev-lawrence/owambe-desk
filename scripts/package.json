@@ -1,0 +1,19 @@
+{
+  "name": "@owambe/scripts",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "seed": "tsx --env-file=.env.local seed/index.ts",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@sanity/client": "8.7.0",
+    "@owambe/shared": "workspace:*"
+  },
+  "devDependencies": {
+    "tsx": "4.23.15",
+    "typescript": "6.0.3",
+    "@types/node": "26.6.2"
+  }
+}

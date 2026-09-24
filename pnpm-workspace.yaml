@@ -1,0 +1,19 @@
+packages:
+  - studio
+  - web
+  - console
+  - packages/*
+  - scripts
+
+allowBuilds:
+  esbuild: true
+
+minimumReleaseAgeExclude:
+  - '@sanity/client@8.7.0'
+  - '@sanity/sdk-react@3.5.0'
+  - '@sanity/sdk@3.5.0'
+
+# Required by the Workflows App SDK docs: SDK 3.x can resolve @sanity/mutate 0.18.1,
+# which leaves document reads pending with @sanity/client 8.
+overrides:
+  '@sanity/sdk@3>@sanity/mutate': 0.18.2

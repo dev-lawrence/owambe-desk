@@ -1,0 +1,15 @@
+{
+  "name": "owambe-desk",
+  "private": true,
+  "packageManager": "pnpm@11.9.0",
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "dev:studio": "pnpm --filter @owambe/studio dev",
+    "dev:web": "pnpm --filter @owambe/web dev",
+    "dev:console": "pnpm --filter @owambe/console dev",
+    "seed": "pnpm --filter @owambe/scripts seed",
+    "typecheck": "pnpm -r typecheck"
+  }
+}

@@ -1,0 +1,77 @@
+@import 'tailwindcss';
+
+/* Colour tokens. One accent, taken from the event's aso ebi palette (emerald). */
+:root {
+  --paper: #f7f3ec;
+  --ink: #1a1714;
+  --ink-soft: #5b544c;
+  --line: #d9d1c4;
+  --accent: #0f5b46;
+  --accent-ink: #f7f3ec;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #141210;
+    --ink: #efe9df;
+    --ink-soft: #a89f93;
+    --line: #38322b;
+    --accent: #6cc3a0;
+    --accent-ink: #0c1f18;
+  }
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+
+  --font-sans: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+
+  /* Type scale: large, tight display sizes; comfortable body. */
+  --text-display: clamp(3rem, 8vw + 1rem, 7.5rem);
+  --text-display--line-height: 0.92;
+  --text-display--letter-spacing: -0.035em;
+  --text-headline: clamp(2rem, 3vw + 1rem, 3.25rem);
+  --text-headline--line-height: 1;
+  --text-headline--letter-spacing: -0.025em;
+  --text-body: 1.0625rem;
+  --text-body--line-height: 1.6;
+}
+
+@layer base {
+  html {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
