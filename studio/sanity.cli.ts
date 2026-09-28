@@ -6,7 +6,7 @@ export default defineCliConfig({
     dataset: process.env.SANITY_STUDIO_DATASET ?? 'production',
   },
   studioHost: 'owambe-desk',
-  deployment: {autoUpdates: true},
+  deployment: {autoUpdates: true, appId: 'o94o5eeplp72rm2avp8mfmwx'},
   typegen: {
     enabled: true,
     path: ['../web/src/**/*.{ts,tsx}', '../packages/shared/src/**/*.ts'],

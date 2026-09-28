@@ -10,6 +10,7 @@ export const structure: StructureResolver = (S) =>
       S.divider(),
       S.documentTypeListItem('programOfEvents').title('Programs of events'),
       S.documentTypeListItem('programItem').title('Program items'),
+      S.documentTypeListItem('programAdjustment').title('Live adjustments'),
       S.divider(),
       S.documentTypeListItem('asoEbiLot').title('Aso ebi lots'),
       S.documentTypeListItem('asoEbiOrder').title('Aso ebi orders'),

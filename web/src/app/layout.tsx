@@ -2,6 +2,7 @@ import type {Metadata} from 'next'
 import {Bricolage_Grotesque} from 'next/font/google'
 import type {ReactNode} from 'react'
 
+import {SiteFooter, SiteHeader} from '@/components/site-header'
 import {SanityLive} from '@/sanity/live'
 
 import './globals.css'
@@ -20,8 +21,10 @@ export const metadata: Metadata = {
 export default function RootLayout({children}: {children: ReactNode}) {
   return (
     <html lang="en-NG" className={bricolage.variable}>
-      <body className="min-h-dvh">
-        {children}
+      <body className="flex min-h-dvh flex-col">
+        <SiteHeader />
+        <div className="grow">{children}</div>
+        <SiteFooter />
         <SanityLive />
       </body>
     </html>

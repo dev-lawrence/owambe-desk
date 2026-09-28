@@ -39,6 +39,22 @@ export type InviteTranslation = {
   reviewedBy?: PersonReference;
 };
 
+export type ProgramItemReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "programItem";
+};
+
+export type SegmentChange = {
+  _type: "segmentChange";
+  item?: ProgramItemReference;
+  fromStart?: string;
+  fromDuration?: number;
+  toStart?: string;
+  toDuration?: number;
+};
+
 export type NonNegotiable = {
   _type: "nonNegotiable";
   requirement?: string;
@@ -177,6 +193,31 @@ export type Vendor = {
   arrivedAt?: string;
 };
 
+export type ProgramOfEventsReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "programOfEvents";
+};
+
+export type ProgramAdjustment = {
+  _id: string;
+  _type: "programAdjustment";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  program?: ProgramOfEventsReference;
+  driftMinutes?: number;
+  note?: string;
+  summary?: string;
+  changes?: Array<
+    {
+      _key: string;
+    } & SegmentChange
+  >;
+  appliedAt?: string;
+};
+
 export type ProgramItem = {
   _id: string;
   _type: "programItem";
@@ -191,13 +232,6 @@ export type ProgramItem = {
   notes?: string;
   actualStart?: string;
   actualEnd?: string;
-};
-
-export type ProgramItemReference = {
-  _ref: string;
-  _type: "reference";
-  _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: "programItem";
 };
 
 export type ProgramOfEvents = {
@@ -395,6 +429,8 @@ export type AllSanitySchemaTypes =
   | Measurements
   | PersonReference
   | InviteTranslation
+  | ProgramItemReference
+  | SegmentChange
   | NonNegotiable
   | AsoEbiColour
   | Money
@@ -409,8 +445,9 @@ export type AllSanitySchemaTypes =
   | SanityImageCrop
   | SanityImageHotspot
   | Vendor
+  | ProgramOfEventsReference
+  | ProgramAdjustment
   | ProgramItem
-  | ProgramItemReference
   | ProgramOfEvents
   | FamilySide
   | Person
@@ -451,10 +488,92 @@ export type EVENT_QUERY_RESULT = {
   }> | null;
 } | null;
 
+// Source: ../packages/shared/src/queries.ts
+// Variable: ASO_EBI_LOTS_QUERY
+// Query: *[_type == "asoEbiLot"] | order(price.amount asc){    _id,    colourName,    fabricType,    unit,    price,    stock,    "colour": event->colours[name == ^.colourName][0]{hex, side},    "paidQuantity": math::sum(*[_type == "asoEbiOrder" && lot._ref == ^._id && defined(paidAt)].quantity)  }
+export type ASO_EBI_LOTS_QUERY_RESULT = Array<{
+  _id: string;
+  colourName: string | null;
+  fabricType: "ankara" | "asoOke" | "gele" | "george" | "lace" | null;
+  unit: string | null;
+  price: Money | null;
+  stock: number | null;
+  colour: {
+    hex: string | null;
+    side: "both" | "bride" | "groom" | null;
+  } | null;
+  paidQuantity: number;
+}>;
+
+// Source: ../packages/shared/src/queries.ts
+// Variable: ORDER_QUERY
+// Query: *[_type == "asoEbiOrder" && _id == $orderId][0]{    _id,    quantity,    amount,    paidAt,    "lot": lot->{colourName, fabricType, unit},    "guestName": guest->person->name  }
+export type ORDER_QUERY_RESULT = {
+  _id: string;
+  quantity: number | null;
+  amount: Money | null;
+  paidAt: string | null;
+  lot: {
+    colourName: string | null;
+    fabricType: "ankara" | "asoOke" | "gele" | "george" | "lace" | null;
+    unit: string | null;
+  } | null;
+  guestName: string | null;
+} | null;
+
+// Source: ../packages/shared/src/queries.ts
+// Variable: PROGRAM_QUERY
+// Query: *[_type == "programOfEvents"] | order(_updatedAt desc)[0]{    _id,    version,    "items": items[]->{_id, title, plannedStart, plannedDuration, actualStart, actualEnd, sideOfInterest, "owner": owner->name}  }
+export type PROGRAM_QUERY_RESULT = {
+  _id: string;
+  version: number | null;
+  items: Array<{
+    _id: string;
+    title: string | null;
+    plannedStart: string | null;
+    plannedDuration: number | null;
+    actualStart: string | null;
+    actualEnd: string | null;
+    sideOfInterest: "both" | "bride" | "groom" | null;
+    owner: string | null;
+  }> | null;
+} | null;
+
+// Source: ../packages/shared/src/queries.ts
+// Variable: INVITE_QUERY
+// Query: *[_type == "guest" && inviteCode == $code][0]{    _id,    seats,    table,    rsvp,    "name": person->name,    "side": person->side,    "event": event->{      title,      date,      venue,      city,      inviteMessage,      "translations": inviteTranslations[reviewed == true]{language, text, reviewedBy}    }  }
+export type INVITE_QUERY_RESULT = {
+  _id: string;
+  seats: number | null;
+  table: string | null;
+  rsvp: "attending" | "declined" | "pending" | null;
+  name: string | null;
+  side: "bride" | "couple" | "groom" | "neutral" | null;
+  event: {
+    title: string | null;
+    date: string | null;
+    venue: {
+      name?: string;
+      address?: string;
+    } | null;
+    city: string | null;
+    inviteMessage: string | null;
+    translations: Array<{
+      language: "ig" | "pcm" | "yo" | null;
+      text: string | null;
+      reviewedBy: PersonReference | null;
+    }> | null;
+  } | null;
+} | null;
+
 // Query TypeMap
 declare global {
   interface SanityQueries {
     '\n  *[_type == "event"] | order(date asc)[0]{\n    _id,\n    title,\n    date,\n    venue,\n    city,\n    status,\n    colours[]{_key, name, hex, side},\n    "couple": couple[]->{_id, name, side}\n  }\n': EVENT_QUERY_RESULT;
+    '\n  *[_type == "asoEbiLot"] | order(price.amount asc){\n    _id,\n    colourName,\n    fabricType,\n    unit,\n    price,\n    stock,\n    "colour": event->colours[name == ^.colourName][0]{hex, side},\n    "paidQuantity": math::sum(*[_type == "asoEbiOrder" && lot._ref == ^._id && defined(paidAt)].quantity)\n  }\n': ASO_EBI_LOTS_QUERY_RESULT;
+    '\n  *[_type == "asoEbiOrder" && _id == $orderId][0]{\n    _id,\n    quantity,\n    amount,\n    paidAt,\n    "lot": lot->{colourName, fabricType, unit},\n    "guestName": guest->person->name\n  }\n': ORDER_QUERY_RESULT;
+    '\n  *[_type == "programOfEvents"] | order(_updatedAt desc)[0]{\n    _id,\n    version,\n    "items": items[]->{_id, title, plannedStart, plannedDuration, actualStart, actualEnd, sideOfInterest, "owner": owner->name}\n  }\n': PROGRAM_QUERY_RESULT;
+    '\n  *[_type == "guest" && inviteCode == $code][0]{\n    _id,\n    seats,\n    table,\n    rsvp,\n    "name": person->name,\n    "side": person->side,\n    "event": event->{\n      title,\n      date,\n      venue,\n      city,\n      inviteMessage,\n      "translations": inviteTranslations[reviewed == true]{language, text, reviewedBy}\n    }\n  }\n': INVITE_QUERY_RESULT;
   }
 }
 // Lets @sanity/client releases that predate the global registry read it too

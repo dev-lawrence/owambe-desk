@@ -1,0 +1,28 @@
+{
+  "name": "@owambe/workflows",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "deploy:check": "sanity-workflows deploy --check",
+    "deploy:dry": "sanity-workflows deploy --dry-run",
+    "deploy": "sanity-workflows deploy"
+  },
+  "devDependencies": {
+    "@sanity/workflow-blueprint": "0.35.0",
+    "@sanity/workflow-cli": "0.35.0",
+    "@sanity/workflow-engine-test": "0.35.0",
+    "@types/node": "26.6.2",
+    "typescript": "6.0.3",
+    "vitest": "5.0.1"
+  },
+  "dependencies": {
+    "@owambe/shared": "workspace:*",
+    "@sanity/workflow-engine": "0.35.0"
+  }
+}

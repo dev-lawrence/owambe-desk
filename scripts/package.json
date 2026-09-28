@@ -5,15 +5,22 @@
   "type": "module",
   "scripts": {
     "seed": "tsx --env-file=.env.local seed/index.ts",
-    "typecheck": "tsc -p tsconfig.json"
+    "typecheck": "tsc -p tsconfig.json",
+    "agent": "tsx --env-file=.env.local agent/index.ts",
+    "test": "vitest run",
+    "rehearse": "tsx --env-file=.env.local rehearse.ts"
   },
   "dependencies": {
+    "@owambe/shared": "workspace:*",
+    "@owambe/workflows": "workspace:*",
     "@sanity/client": "8.7.0",
-    "@owambe/shared": "workspace:*"
+    "@sanity/workflow-engine": "0.35.0"
   },
   "devDependencies": {
+    "@sanity/workflow-engine-test": "0.35.0",
+    "@types/node": "26.6.2",
     "tsx": "4.23.15",
     "typescript": "6.0.3",
-    "@types/node": "26.6.2"
+    "vitest": "5.0.1"
   }
 }

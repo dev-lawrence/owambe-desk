@@ -1,4 +1,5 @@
-import {ThemeProvider} from '@sanity/ui'
+import {LayerProvider, PortalProvider, ThemeProvider} from '@sanity/ui'
+import '@sanity/ui/styles.css'
 import {ToastProvider} from '@sanity/ui/toast'
 import {buildTheme} from '@sanity/ui/theme'
 import type {ReactNode} from 'react'
@@ -16,7 +17,11 @@ export function SanityUI({children}: {children: ReactNode}) {
     <>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
-        <ToastProvider>{children}</ToastProvider>
+        <LayerProvider>
+          <PortalProvider>
+            <ToastProvider>{children}</ToastProvider>
+          </PortalProvider>
+        </LayerProvider>
       </ThemeProvider>
     </>
   )

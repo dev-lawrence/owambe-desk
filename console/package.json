@@ -7,24 +7,33 @@
     "dev": "sanity dev",
     "build": "sanity build",
     "deploy": "sanity deploy",
-    "typecheck": "tsc -p tsconfig.json"
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "vitest run"
   },
   "dependencies": {
+    "@hugeicons/core-free-icons": "4.3.5",
+    "@hugeicons/react": "1.1.10",
+    "@owambe/shared": "workspace:*",
+    "@owambe/workflows": "workspace:*",
     "@sanity/sdk": "3.5.0",
     "@sanity/sdk-react": "3.5.0",
     "@sanity/ui": "4.2.3",
-    "styled-components": "6.5.3",
-    "@owambe/shared": "workspace:*",
+    "@sanity/workflow-components": "0.35.0",
+    "@sanity/workflow-diagram": "0.35.0",
+    "@sanity/workflow-engine": "0.35.0",
+    "@sanity/workflow-react": "0.35.0",
+    "@sanity/workflow-sdk": "0.35.0",
     "react": "19.3.0",
     "react-dom": "19.3.0",
-    "@hugeicons/react": "1.1.10",
-    "@hugeicons/core-free-icons": "4.3.5"
+    "styled-components": "6.5.3"
   },
   "devDependencies": {
-    "sanity": "6.16.0",
-    "typescript": "6.0.3",
+    "@sanity/workflow-engine-test": "0.35.0",
+    "@types/node": "26.6.2",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
-    "@types/node": "26.6.2"
+    "sanity": "6.16.0",
+    "typescript": "6.0.3",
+    "vitest": "5.0.1"
   }
 }

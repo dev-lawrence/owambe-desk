@@ -4,6 +4,7 @@ import {event} from './documents/event'
 import {familySide} from './documents/family-side'
 import {guest} from './documents/guest'
 import {person} from './documents/person'
+import {programAdjustment} from './documents/program-adjustment'
 import {programItem} from './documents/program-item'
 import {programOfEvents} from './documents/program-of-events'
 import {vendor} from './documents/vendor'
@@ -12,6 +13,7 @@ import {inviteTranslation} from './objects/invite-translation'
 import {measurements} from './objects/measurements'
 import {money} from './objects/money'
 import {nonNegotiable} from './objects/non-negotiable'
+import {segmentChange} from './objects/segment-change'
 
 export const schemaTypes = [
   event,
@@ -19,6 +21,7 @@ export const schemaTypes = [
   familySide,
   programOfEvents,
   programItem,
+  programAdjustment,
   asoEbiLot,
   asoEbiOrder,
   guest,
@@ -26,6 +29,7 @@ export const schemaTypes = [
   money,
   asoEbiColour,
   nonNegotiable,
+  segmentChange,
   inviteTranslation,
   measurements,
 ]

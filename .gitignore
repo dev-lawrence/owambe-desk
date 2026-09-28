@@ -11,3 +11,4 @@ out
 .netlify
 schema.json
 next-env.d.ts
+scripts/.rehearsal.json

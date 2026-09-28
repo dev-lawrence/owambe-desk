@@ -1,4 +1,5 @@
 import {EVENT_QUERY} from '@owambe/shared/queries'
+import Link from 'next/link'
 import {notFound} from 'next/navigation'
 
 import {sanityFetch} from '@/sanity/live'
@@ -74,6 +75,20 @@ export default async function HomePage() {
           is printed. Aso ebi is paid for before it goes to the tailor. On the day, the coordinator runs the program live
           from one screen, and this site updates as it happens.
         </p>
+        <ul className="mt-6 grid gap-3 border-t border-line pt-6">
+          {[
+            {href: '/program', label: 'Follow the program live', note: 'What is on now, and how late we are running.'},
+            {href: '/aso-ebi', label: 'Order aso ebi', note: 'Pay online with your invite code.'},
+            {href: '/how-it-works', label: 'See how it works', note: 'Every approval and payment, with who did it and why.'},
+          ].map((link) => (
+            <li key={link.href}>
+              <Link href={link.href} className="font-medium text-accent underline underline-offset-4">
+                {link.label}
+              </Link>
+              <span className="block text-ink-soft">{link.note}</span>
+            </li>
+          ))}
+        </ul>
       </section>
     </main>
   )

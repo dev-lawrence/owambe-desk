@@ -12,19 +12,27 @@
     "typegen": "sanity schemas extract --force && sanity typegen generate"
   },
   "dependencies": {
-    "sanity": "6.16.0",
-    "@sanity/vision": "6.16.0",
-    "styled-components": "6.5.3",
+    "@hugeicons/core-free-icons": "4.3.5",
+    "@hugeicons/react": "1.1.10",
     "@owambe/shared": "workspace:*",
+    "@sanity/sdk": "3.5.0",
+    "@sanity/vision": "6.16.0",
+    "@sanity/workflow-components": "0.35.0",
+    "@sanity/workflow-diagram": "0.35.0",
+    "@sanity/workflow-engine": "0.35.0",
+    "@sanity/workflow-react": "0.35.0",
+    "@sanity/workflow-sdk": "0.35.0",
+    "@sanity/workflow-studio": "0.35.0",
+    "@sanity/workflow-studio-plugin": "0.35.0",
     "react": "19.3.0",
     "react-dom": "19.3.0",
-    "@hugeicons/react": "1.1.10",
-    "@hugeicons/core-free-icons": "4.3.5"
+    "sanity": "6.16.0",
+    "styled-components": "6.5.3"
   },
   "devDependencies": {
-    "typescript": "6.0.3",
+    "@types/node": "26.6.2",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
-    "@types/node": "26.6.2"
+    "typescript": "6.0.3"
   }
 }

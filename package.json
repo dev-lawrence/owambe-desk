@@ -10,6 +10,9 @@
     "dev:web": "pnpm --filter @owambe/web dev",
     "dev:console": "pnpm --filter @owambe/console dev",
     "seed": "pnpm --filter @owambe/scripts seed",
-    "typecheck": "pnpm -r typecheck"
+    "typecheck": "pnpm -r typecheck",
+    "agent": "pnpm --filter @owambe/scripts agent",
+    "test": "pnpm -r test",
+    "rehearse": "pnpm --filter @owambe/scripts rehearse"
   }
 }

@@ -1,0 +1,6 @@
+# The public site is the /web workspace of this pnpm monorepo.
+# Deployed with the Netlify CLI from the repo root: `netlify deploy --build --prod --filter @owambe/web`.
+[build]
+  base = "web"
+  command = "pnpm build"
+  publish = "web/.next"

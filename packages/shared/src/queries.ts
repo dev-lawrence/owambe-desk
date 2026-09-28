@@ -16,3 +16,54 @@ export const EVENT_QUERY = defineQuery(`
     "couple": couple[]->{_id, name, side}
   }
 `)
+
+export const ASO_EBI_LOTS_QUERY = defineQuery(`
+  *[_type == "asoEbiLot"] | order(price.amount asc){
+    _id,
+    colourName,
+    fabricType,
+    unit,
+    price,
+    stock,
+    "colour": event->colours[name == ^.colourName][0]{hex, side},
+    "paidQuantity": math::sum(*[_type == "asoEbiOrder" && lot._ref == ^._id && defined(paidAt)].quantity)
+  }
+`)
+
+export const ORDER_QUERY = defineQuery(`
+  *[_type == "asoEbiOrder" && _id == $orderId][0]{
+    _id,
+    quantity,
+    amount,
+    paidAt,
+    "lot": lot->{colourName, fabricType, unit},
+    "guestName": guest->person->name
+  }
+`)
+
+export const PROGRAM_QUERY = defineQuery(`
+  *[_type == "programOfEvents"] | order(_updatedAt desc)[0]{
+    _id,
+    version,
+    "items": items[]->{_id, title, plannedStart, plannedDuration, actualStart, actualEnd, sideOfInterest, "owner": owner->name}
+  }
+`)
+
+export const INVITE_QUERY = defineQuery(`
+  *[_type == "guest" && inviteCode == $code][0]{
+    _id,
+    seats,
+    table,
+    rsvp,
+    "name": person->name,
+    "side": person->side,
+    "event": event->{
+      title,
+      date,
+      venue,
+      city,
+      inviteMessage,
+      "translations": inviteTranslations[reviewed == true]{language, text, reviewedBy}
+    }
+  }
+`)
