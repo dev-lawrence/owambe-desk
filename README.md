@@ -17,7 +17,7 @@ Demo event (fictional): the wedding reception of Tolu Adeyemi and Emeka Okafor, 
 | Live program | https://owambe-desk.netlify.app/program |
 | Studio | https://owambe-desk.sanity.studio (needs a project login) |
 | Coordinator console | Sanity Dashboard app "Owambe Desk Console" (needs an organization login) |
-| Source | https://github.com/dev-lawrence/owambe-deskt |
+| Source | https://github.com/dev-lawrence/owambe-desk |
 
 Judges can't sign in to our Dashboard, so the public site is built to show the system working without a login: How it works reads the real workflow definitions and every run's history.
 
