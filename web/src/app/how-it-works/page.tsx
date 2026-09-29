@@ -8,8 +8,9 @@ import {readableHistory, whoCanAct, type HistoryEvent, type Step} from '@/lib/wo
 import {apiVersion, dataset, projectId} from '@/sanity/env'
 
 export const metadata: Metadata = {title: 'How it works · Owambe Desk'}
-// Workflow documents are not public, so this page reads them with a server token and refreshes each minute.
-export const revalidate = 60
+// Workflow documents are not public, so this page reads them with a server token. It is rendered on every
+// request: the revalidate = 60 setting used first never refreshed the cached page on Netlify.
+export const dynamic = 'force-dynamic'
 
 type Action = {name: string; title?: string; filter?: string}
 type Stage = {

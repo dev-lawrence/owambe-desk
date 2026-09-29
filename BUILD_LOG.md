@@ -696,7 +696,7 @@ Recording a GIF of `/program` following the coordinator, the deployed page never
 1. **CORS.** Sanity's live-events connection failed in the browser (`TypeError: Failed to fetch`) because `https://owambe-desk.netlify.app` was not in the project's CORS origins (only localhost ones were). Added the origin without credentials (the public site never needs them). Checked: the browser now gets `200 text/event-stream`, and events arrive when a document changes.
 2. **A stale prerendered page.** `/program`, `/aso-ebi` and `/` were prerendered at build time. `/program` was serving HTML about 7.7 hours old, and the tag-based refresh did not replace it. Set `dynamic = 'force-dynamic'` on those three pages so they render on each request. Checked: the served HTML then showed current data, and with the page open a segment change moved "On now" without a reload.
 
-The Phase 5 entry said `/program` was live-updating. That was only true on the developer machine until this fix. Recorded here rather than edited out. `/how-it-works` stays cached for 60 seconds on purpose (`revalidate = 60`, it reads private workflow documents), and `/i/[code]` and the order page were already dynamic.
+The Phase 5 entry said `/program` was live-updating. That was only true on the developer machine until this fix. Recorded here rather than edited out. `/i/[code]` and the order page were already dynamic. `/how-it-works` was first left on `revalidate = 60`; see the correction below.
 
 The demo GIFs (`docs/demo/`) were recorded from the deployed site using `pnpm rehearse` and reset afterwards. Checked: no program item has an actual time, and the plan is back on 12 December.
 
@@ -709,3 +709,7 @@ Run by the owner through Studio, with the agent run from the CLI. Real history o
 3. `pnpm agent draft` redrafted against that reason. **Version 7** (21 segments, accepted on the first attempt) has "Palm wine for the elders" as its own 10-minute segment directly after "Breaking of kola nut (Oji)", before the elders' food service. Checked in the dataset, not assumed.
 
 Two small things: the rejection reason shows a leading "> " because it was pasted from a quoted block; and the console's home text still said the views "arrive in the next phases", a leftover from Phase 1. Fixed and redeployed.
+
+**Correction, same day:** `revalidate = 60` on `/how-it-works` did not work on Netlify either. After the approval loop above the page still showed "version 5, Family review, 3 steps" about eight hours after that snapshot, while the real run had 19 steps and was in Ready for print. It is now `force-dynamic` too, and the served page shows version 7, "Ready for print", 19 steps. Every page that shows live data is now rendered per request. The cost is one Sanity query (two on How it works) per visit, which is fine at this size.
+
+One honest wrinkle in the history it now shows: at 07:08 the groom's family approval was recorded "for Chief Adebayo Adeyemi", the bride's approver, because of the accidental double approval. The page shows what was typed, not what it should have been. It is left as it is, not edited.
