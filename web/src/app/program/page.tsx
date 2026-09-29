@@ -6,6 +6,9 @@ import {sanityFetch} from '@/sanity/live'
 
 import {LiveProgram} from './live-program'
 
+// Shows live content, so it is rendered on every request instead of served from a build-time cache.
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {title: 'Program · Tolu & Emeka'}
 
 export default async function ProgramPage() {

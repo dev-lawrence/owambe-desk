@@ -688,3 +688,14 @@ All ten variables from `web/.env.example` are set in Netlify, with `NEXT_PUBLIC_
 - **Event date: 12 December 2026.** The owner had set 7 October while testing. The contest closes on 4 October, but judges review after that, and a date during judging would make the live program page look stale. December matches the invite message, all three translations and the seed. Set the date back, deleted the approval run drafted against 7 October, and had the agent redraft: version 5, 20 segments, accepted on the first attempt, now in family review. The first segment is at 14:00 WAT on 12 December; no orphaned program items.
 - **A real payment on the live site: done by the owner.** Sandbox checkout on `owambe-desk.netlify.app`, paid, and the order reached Paid through the registered endpoint with nothing running locally. That order and its run are kept on purpose: it is genuine history for How it works (a payment moved by the webhook, not a person).
 - **Deployed console opened by the owner in the Dashboard:** loads and works.
+
+### Found while recording the demo: the live program was not live in production
+
+Recording a GIF of `/program` following the coordinator, the deployed page never changed. Two separate causes, both invisible locally:
+
+1. **CORS.** Sanity's live-events connection failed in the browser (`TypeError: Failed to fetch`) because `https://owambe-desk.netlify.app` was not in the project's CORS origins (only localhost ones were). Added the origin without credentials (the public site never needs them). Checked: the browser now gets `200 text/event-stream`, and events arrive when a document changes.
+2. **A stale prerendered page.** `/program`, `/aso-ebi` and `/` were prerendered at build time. `/program` was serving HTML about 7.7 hours old, and the tag-based refresh did not replace it. Set `dynamic = 'force-dynamic'` on those three pages so they render on each request. Checked: the served HTML then showed current data, and with the page open a segment change moved "On now" without a reload.
+
+The Phase 5 entry said `/program` was live-updating. That was only true on the developer machine until this fix. Recorded here rather than edited out. `/how-it-works` stays cached for 60 seconds on purpose (`revalidate = 60`, it reads private workflow documents), and `/i/[code]` and the order page were already dynamic.
+
+The demo GIFs (`docs/demo/`) were recorded from the deployed site using `pnpm rehearse` and reset afterwards. Checked: no program item has an actual time, and the plan is back on 12 December.

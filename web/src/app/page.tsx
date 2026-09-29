@@ -4,6 +4,9 @@ import {notFound} from 'next/navigation'
 
 import {sanityFetch} from '@/sanity/live'
 
+// Shows live content, so it is rendered on every request instead of served from a build-time cache.
+export const dynamic = 'force-dynamic'
+
 const dateFormat = new Intl.DateTimeFormat('en-NG', {
   weekday: 'long',
   day: 'numeric',

@@ -6,6 +6,9 @@ import {sanityFetch} from '@/sanity/live'
 
 import {type LotOption, OrderForm} from './order-form'
 
+// Shows live content, so it is rendered on every request instead of served from a build-time cache.
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {title: 'Aso ebi · Tolu & Emeka'}
 
 export default async function AsoEbiPage() {
