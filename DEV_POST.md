@@ -83,3 +83,17 @@ The build log is honest about this, so here are the parts I'd want to know as a 
 Give each family approver their own account, run the agent on a Sanity Function instead of a process someone has to start, and try it on a real wedding with a real coordinator who will tell me everything that's wrong with it.
 
 Built with Claude Code as my pair. Every limitation and every "not verified" is in the [build log](https://github.com/dev-lawrence/owambe-desk/blob/main/BUILD_LOG.md).
+
+## Sanity Project Details
+
+- **Project ID:** `qyn1i646`
+- **Dataset:** `production`, which is public. Anyone can query it without a token:
+  [open the query in your browser](https://qyn1i646.apicdn.sanity.io/v2026-09-24/data/query/production?query=%2A%5B_type%3D%3D%22event%22%5D%5B0%5D%7Btitle%2Cdate%2Ccity%7D) (`*[_type=="event"][0]{title,date,city}`)
+- **Studio:** https://owambe-desk.sanity.studio (needs a project login)
+- **Schema:** `studio/schemaTypes` in the repo. Ten document types: `event`, `person`, `familySide`, `guest`, `vendor`, `programOfEvents`, `programItem`, `programAdjustment`, `asoEbiLot` and `asoEbiOrder`. Every field has a description saying why it exists.
+- **Modelling choices:** people, families, events and orders are linked by references, not repeated as text. The family non-negotiables sit on their own document, because the agent reads them every time it drafts. Approvals are not a separate document type. The Workflows engine already stores every decision with who made it, so a second copy could only drift.
+- **Workflows:** three definitions (program approval, aso ebi order, live adjustment), stored in the same dataset. The How it works page reads them and shows every run.
+
+## Agent Session
+
+<!-- Paste the embed of the Claude Code session here after uploading it. -->
