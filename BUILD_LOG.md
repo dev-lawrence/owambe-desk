@@ -699,3 +699,13 @@ Recording a GIF of `/program` following the coordinator, the deployed page never
 The Phase 5 entry said `/program` was live-updating. That was only true on the developer machine until this fix. Recorded here rather than edited out. `/how-it-works` stays cached for 60 seconds on purpose (`revalidate = 60`, it reads private workflow documents), and `/i/[code]` and the order page were already dynamic.
 
 The demo GIFs (`docs/demo/`) were recorded from the deployed site using `pnpm rehearse` and reset afterwards. Checked: no program item has an actual time, and the plan is back on 12 December.
+
+### The demo approval loop, run end to end (2026-09-29)
+
+Run by the owner through Studio, with the agent run from the CLI. Real history on the live dataset:
+
+1. Version 5 drafted by the agent. Both families approved it, by mistake, so it reached **Ready for print**. Approvals can't be withdrawn one at a time, so the way back was the designed one: the coordinator **locked** it and **reopened it with a reason** (the palm wine request), which sent it to Drafting. That is the brief's "edits after the lock go through a transition" rule, used for real.
+2. Version 6 drafted. Bride's family approved; groom's family **rejected** it with the reason: palm wine for the elders must be its own line, straight after the kola.
+3. `pnpm agent draft` redrafted against that reason. **Version 7** (21 segments, accepted on the first attempt) has "Palm wine for the elders" as its own 10-minute segment directly after "Breaking of kola nut (Oji)", before the elders' food service. Checked in the dataset, not assumed.
+
+Two small things: the rejection reason shows a leading "> " because it was pasted from a quoted block; and the console's home text still said the views "arrive in the next phases", a leftover from Phase 1. Fixed and redeployed.

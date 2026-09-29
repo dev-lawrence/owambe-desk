@@ -4,8 +4,7 @@ import {type DocumentHandle, useDocumentProjection, useDocuments} from '@sanity/
 import {Box, Card, Container, Flex, Grid, Heading, Spinner, Stack, Text} from '@sanity/ui'
 import {Suspense} from 'react'
 
-// Phase 1: prove the console boots inside the Dashboard and reads live content.
-// The live program, approvals, aso ebi board and arrivals views come in Phase 4.
+// The console home: live counts for the event, above the four working views.
 
 function Count({label, icon, documentType, filter}: {label: string; icon: IconSvgElement; documentType: string; filter?: string}) {
   const {count} = useDocuments({documentType, ...(filter ? {filter} : {}), batchSize: 1})
@@ -69,7 +68,7 @@ export function EventOverview() {
         </Suspense>
         <Box>
           <Text size={1} muted>
-            Owambe Desk coordinator console. Live program, approvals, aso ebi and arrivals arrive in the next phases.
+            Run the day from here: start and end each part of the program, follow approvals and aso ebi orders, and check guests and vendors in.
           </Text>
         </Box>
       </Stack>
