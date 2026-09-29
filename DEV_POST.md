@@ -8,11 +8,24 @@ tags: devchallenge, sanitychallenge, sanity, nextjs
 
 ## What I built
 
-A big Nigerian wedding, an owambe, already runs on approvals. Nobody calls them that, but they are.
+**Owambe Desk is a tool for planning and running a big Nigerian wedding.**
 
-Both families have to agree on the program of events before it goes to the printer. In a Yoruba and Igbo union that is a real negotiation. The groom's family wants the kola nut broken before anyone eats. The bride's family wants their prayer before the cake is cut. Guests buy aso ebi, the matching fabric each side wears, and they have to pay before it goes to the tailor. Then on the day the coordinator runs the program live, and it always runs late.
+In Nigeria, a big wedding party is called an owambe. Often hundreds of guests come, and a lot of people have to agree on things before the day. Owambe Desk handles the three that cause the most trouble.
 
-Owambe Desk writes those processes down as Sanity Workflows, stored in the same dataset as the content they move. An AI agent drafts the program from the couple's brief and both families' non-negotiables. People approve or reject it. A payment webhook confirms aso ebi money. When the day runs late, the agent proposes a re-timing and the coordinator decides. They all move work through the same transitions, and the definition itself says who may fire each one. The agent cannot approve anything. The tests check that, and when I deliberately weakened the rule, they failed.
+**1. Both families must agree on the program.**
+The program is the order of the day: who speaks, when the food comes, when the couple dances. In a union between two tribes, each family has traditions it will not bend on. The groom's family may want the kola nut broken before anyone eats. The bride's family may want their prayer before the cake is cut. Here, an AI agent writes the first draft from the couple's brief and both families' rules. Each family then approves it or rejects it with a reason. If one rejects, the agent rewrites it using that reason. The program is only ready to print when both families have approved the same version.
+
+**2. Guests must pay for their aso ebi before it goes to the tailor.**
+Aso ebi is the matching outfit fabric that guests wear. A guest picks a fabric on the website and pays online. The moment the payment provider confirms it, the order is marked as paid by itself. Nobody clicks "paid" by hand. Then the coordinator sends the fabric to the tailor.
+
+**3. The coordinator runs the day live, and the day runs late.**
+The coordinator taps Start and End as each part happens. The public website shows what is on now and what is next, and it updates by itself, so a guest in the car park can check. If the day falls more than 10 minutes behind, the coordinator can ask the agent to suggest a new timing. The agent only suggests. The coordinator decides.
+
+**One rule runs through all of it: the AI agent can help, but only people can approve.**
+The agent can draft, rewrite and suggest. It cannot approve a program, and it cannot mark an order paid. This is not just hidden in the buttons. It is written into the rules of each process, and tests check it.
+
+**How it is built, in one paragraph.**
+Each process above is a Sanity Workflow, which is a set of steps and rules that lives in the same database as the content. The public website is Next.js. The coordinator's screen is a custom app inside the Sanity Dashboard. Payments go through Bachs. The full technical story is further down.
 
 The demo wedding is fictional: Tolu Adeyemi and Emeka Okafor, Asaba, Delta State, 12 December 2026.
 
