@@ -35,8 +35,6 @@ The demo wedding is fictional: Tolu Adeyemi and Emeka Okafor, Asaba, Delta State
 - Start here, it was built for judges: https://owambe-desk.netlify.app/how-it-works
 - A guest's invite: https://owambe-desk.netlify.app/i/kzfr2r
 - Live program: https://owambe-desk.netlify.app/program
-- Code: https://github.com/dev-lawrence/owambe-desk
-- Build log: https://github.com/dev-lawrence/owambe-desk/blob/main/BUILD_LOG.md
 - Sanity project ID: `qyn1i646`
 - Public dataset: `production`. Try it with no token:
   `https://qyn1i646.apicdn.sanity.io/v2026-09-24/data/query/production?query=*[_type=="event"][0]{title,date,city}`
@@ -45,6 +43,12 @@ The demo wedding is fictional: Tolu Adeyemi and Emeka Okafor, Asaba, Delta State
 ![The live program page following the coordinator, with no reload](https://raw.githubusercontent.com/dev-lawrence/owambe-desk/main/docs/demo/live-program.gif)
 
 You can't sign in to our Sanity Dashboard, so the public site has to prove the system works without a login. How it works reads the deployed workflow definitions and draws each stage, each action, and who is allowed to fire it. That "who" comes from the definition's real filter, not from text I typed. Under that is every run with its full history: what the agent submitted and why, which family rejected and their reason, and which payment the webhook confirmed.
+
+## Code
+
+{% github dev-lawrence/owambe-desk %}
+
+The repo has the Studio, the public site, the coordinator console, the agent and the workflow definitions. [BUILD_LOG.md](https://github.com/dev-lawrence/owambe-desk/blob/main/BUILD_LOG.md) is the honest record of the build, including what failed.
 
 ## How I built it
 
