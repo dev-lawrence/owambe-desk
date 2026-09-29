@@ -28,7 +28,6 @@ The demo wedding is fictional: Tolu Adeyemi and Emeka Okafor, Asaba, Delta State
 - Public dataset: `production`. Try it with no token:
   `https://qyn1i646.apicdn.sanity.io/v2026-09-24/data/query/production?query=*[_type=="event"][0]{title,date,city}`
 
-<!-- GIF: paying for aso ebi and the order page flipping to Paid -->
 ![How it works: the deployed workflow, then a real run's history](https://raw.githubusercontent.com/dev-lawrence/owambe-desk/main/docs/demo/how-it-works.gif)
 ![The live program page following the coordinator, with no reload](https://raw.githubusercontent.com/dev-lawrence/owambe-desk/main/docs/demo/live-program.gif)
 
