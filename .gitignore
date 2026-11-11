@@ -1,4 +1,6 @@
 node_modules
+.env
+.env.local
 .env.*.local
 .next
 dist
@@ -10,4 +12,3 @@ out
 schema.json
 next-env.d.ts
 scripts/.rehearsal.json
-config.bat

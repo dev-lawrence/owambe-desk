@@ -6,9 +6,9 @@
     "node": ">=22.12"
   },
   "scripts": {
-    "dev:studio": "node init && pnpm --filter @owambe/studio dev",
-    "dev:web": "node init && pnpm --filter @owambe/web dev",
-    "dev:console": "node init && pnpm --filter @owambe/console dev",
+    "dev:studio": "pnpm --filter @owambe/studio dev",
+    "dev:web": "pnpm --filter @owambe/web dev",
+    "dev:console": "pnpm --filter @owambe/console dev",
     "seed": "pnpm --filter @owambe/scripts seed",
     "typecheck": "pnpm -r typecheck",
     "agent": "pnpm --filter @owambe/scripts agent",

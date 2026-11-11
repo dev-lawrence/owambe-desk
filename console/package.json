@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "node init && sanity dev",
-    "build": "node init && sanity build",
+    "dev": "sanity dev",
+    "build": "sanity build",
     "deploy": "sanity deploy",
     "typecheck": "tsc -p tsconfig.json",
     "test": "vitest run"
